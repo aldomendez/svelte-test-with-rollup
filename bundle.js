@@ -93,7 +93,7 @@ var set$1 = function set$1(object, property, value, receiver) {
 function renderMainFragment(root, component, target) {
 	var h1 = document.createElement('h1');
 
-	var text = document.createTextNode("Hello ");
+	var text = document.createTextNode("Hola mi ");
 	h1.appendChild(text);
 
 	var text1 = document.createTextNode(root.name);
@@ -101,15 +101,51 @@ function renderMainFragment(root, component, target) {
 
 	target.appendChild(h1);
 
+	var text2 = document.createTextNode("\n");
+	target.appendChild(text2);
+
+	var p = document.createElement('p');
+
+	var text3 = document.createTextNode(root.a);
+	p.appendChild(text3);
+
+	var text4 = document.createTextNode(" + ");
+	p.appendChild(text4);
+
+	var text5 = document.createTextNode(root.b);
+	p.appendChild(text5);
+
+	var text6 = document.createTextNode(" = ");
+	p.appendChild(text6);
+
+	var text7 = document.createTextNode(root.a + root.b);
+	p.appendChild(text7);
+
+	target.appendChild(p);
+
 	return {
 		update: function update(changed, root) {
 			text1.data = root.name;
+
+			text3.data = root.a;
+
+			text5.data = root.b;
+
+			text7.data = root.a + root.b;
 		},
 
 		teardown: function teardown(detach) {
 			if (detach) h1.parentNode.removeChild(h1);
 
 			if (detach) text.parentNode.removeChild(text);
+
+			if (detach) text2.parentNode.removeChild(text2);
+
+			if (detach) p.parentNode.removeChild(p);
+
+			if (detach) text4.parentNode.removeChild(text4);
+
+			if (detach) text6.parentNode.removeChild(text6);
 		}
 	};
 }
@@ -132,7 +168,7 @@ function HelloWorld(options) {
 			var newValue = newState[key];
 			var oldValue = oldState[key];
 
-			if (newValue === oldValue && (typeof newValue === 'undefined' ? 'undefined' : _typeof(newValue)) !== 'object') continue;
+			if (newValue === oldValue && (typeof newValue === "undefined" ? "undefined" : _typeof(newValue)) !== 'object') continue;
 
 			var callbacks = group[key];
 			if (!callbacks) continue;
@@ -216,9 +252,11 @@ function HelloWorld(options) {
 var app = new HelloWorld({
   target: document.querySelector('main'),
   data: {
-    name: 'Sandra Quilantan'
+    name: 'Corazon',
+    a: 1,
+    b: 6
   }
 });
 
 }());
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjpudWxsLCJzb3VyY2VzIjpbInNyYy9tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBIZWxsb1dvcmxkIGZyb20gJy4vY29tcG9uZW50cy9IZWxsb1dvcmxkLmh0bWwnXG5cbnZhciBhcHAgPSBuZXcgSGVsbG9Xb3JsZCh7XG4gIHRhcmdldDogZG9jdW1lbnQucXVlcnlTZWxlY3RvcignbWFpbicpLFxuICBkYXRhOiB7XG4gICAgbmFtZTogJ1NhbmRyYSBRdWlsYW50YW4nXG4gIH1cbn0pXG4iXSwibmFtZXMiOlsiYXBwIiwiSGVsbG9Xb3JsZCIsImRvY3VtZW50IiwicXVlcnlTZWxlY3RvciJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFFQSxJQUFJQSxNQUFNLElBQUlDLFVBQUosQ0FBZTtVQUNmQyxTQUFTQyxhQUFULENBQXVCLE1BQXZCLENBRGU7UUFFakI7VUFDRTs7Q0FIQSxDQUFWOzsifQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjpudWxsLCJzb3VyY2VzIjpbInNyYy9tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBIZWxsb1dvcmxkIGZyb20gJy4vY29tcG9uZW50cy9IZWxsb1dvcmxkLmh0bWwnXG5cbnZhciBhcHAgPSBuZXcgSGVsbG9Xb3JsZCh7XG4gIHRhcmdldDogZG9jdW1lbnQucXVlcnlTZWxlY3RvcignbWFpbicpLFxuICBkYXRhOiB7XG4gICAgbmFtZTogJ0NvcmF6b24nLFxuICAgIGE6IDEsXG4gICAgYjogNlxuICB9XG59KVxuIl0sIm5hbWVzIjpbImFwcCIsIkhlbGxvV29ybGQiLCJkb2N1bWVudCIsInF1ZXJ5U2VsZWN0b3IiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRUEsSUFBSUEsTUFBTSxJQUFJQyxVQUFKLENBQWU7VUFDZkMsU0FBU0MsYUFBVCxDQUF1QixNQUF2QixDQURlO1FBRWpCO1VBQ0UsU0FERjtPQUVELENBRkM7T0FHRDs7Q0FMRyxDQUFWOzsifQ==
