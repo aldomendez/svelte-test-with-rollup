@@ -4,7 +4,8 @@
   "description": "",
   "main": "HelloWorld.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "babel -c"
   },
   "keywords": [],
   "author": "Aldo Mendez",
@@ -12,5 +13,11 @@
   "dependencies": {
     "connect": "^3.5.0",
     "serve-static": "^1.11.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.2.0",
+    "rollup": "^0.36.4",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-svelte": "^1.0.0"
   }
 }
