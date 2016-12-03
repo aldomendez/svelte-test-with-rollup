@@ -90,69 +90,179 @@ var set$1 = function set$1(object, property, value, receiver) {
   return value;
 };
 
+var template = function () {
+	return {
+		data: function data() {
+			return {
+				categories: ['animal', 'vegetal', 'mineral'],
+				count: 0
+			};
+		},
+
+		methods: {
+			select: function select(name) {
+				console.log(name);
+			}
+		}
+	};
+}();
+
 function renderMainFragment(root, component, target) {
-	var h1 = document.createElement('h1');
+	var p = document.createElement('p');
 
-	var text = document.createTextNode("Hola mi ");
-	h1.appendChild(text);
+	var text = document.createTextNode("Count: ");
+	p.appendChild(text);
 
-	var text1 = document.createTextNode(root.name);
-	h1.appendChild(text1);
+	var text1 = document.createTextNode(root.count);
+	p.appendChild(text1);
 
-	target.appendChild(h1);
+	target.appendChild(p);
 
 	var text2 = document.createTextNode("\n");
 	target.appendChild(text2);
 
-	var p = document.createElement('p');
+	var button = document.createElement('button');
+	function clickHandler(event) {
+		var root = this.__svelte.root;
 
-	var text3 = document.createTextNode(root.a);
-	p.appendChild(text3);
+		component.set({ count: root.count + 1 });
+	}
 
-	var text4 = document.createTextNode(" + ");
-	p.appendChild(text4);
+	button.addEventListener('click', clickHandler, false);
+	button.__svelte = {
+		root: root
+	};
 
-	var text5 = document.createTextNode(root.b);
-	p.appendChild(text5);
+	var text3 = document.createTextNode("+1");
+	button.appendChild(text3);
 
-	var text6 = document.createTextNode(" = ");
-	p.appendChild(text6);
+	target.appendChild(button);
 
-	var text7 = document.createTextNode(root.a + root.b);
-	p.appendChild(text7);
+	var text4 = document.createTextNode("\n\n");
+	target.appendChild(text4);
 
-	target.appendChild(p);
+	var p1 = document.createElement('p');
+
+	var text5 = document.createTextNode("Select Category:");
+	p1.appendChild(text5);
+
+	target.appendChild(p1);
+
+	var text6 = document.createTextNode("\n\n");
+	target.appendChild(text6);
+
+	var eachBlock_0_anchor = document.createComment("#each categories");
+	target.appendChild(eachBlock_0_anchor);
+
+	var eachBlock_0_value = root.categories;
+	var eachBlock_0_fragment = document.createDocumentFragment();
+	var eachBlock_0_iterations = [];
+
+	for (var i = 0; i < eachBlock_0_value.length; i += 1) {
+		eachBlock_0_iterations[i] = renderEachBlock_0(root, eachBlock_0_value, eachBlock_0_value[i], i, component, eachBlock_0_fragment);
+	}
+
+	eachBlock_0_anchor.parentNode.insertBefore(eachBlock_0_fragment, eachBlock_0_anchor);
 
 	return {
 		update: function update(changed, root) {
-			text1.data = root.name;
+			text1.data = root.count;
 
-			text3.data = root.a;
+			button.__svelte.root = root;
 
-			text5.data = root.b;
+			var eachBlock_0_value = root.categories;
 
-			text7.data = root.a + root.b;
+			for (var i = 0; i < eachBlock_0_value.length; i += 1) {
+				if (!eachBlock_0_iterations[i]) {
+					eachBlock_0_iterations[i] = renderEachBlock_0(root, eachBlock_0_value, eachBlock_0_value[i], i, component, eachBlock_0_fragment);
+				} else {
+					eachBlock_0_iterations[i].update(changed, root, eachBlock_0_value, eachBlock_0_value[i], i);
+				}
+			}
+
+			for (var i = eachBlock_0_value.length; i < eachBlock_0_iterations.length; i += 1) {
+				eachBlock_0_iterations[i].teardown(true);
+			}
+
+			eachBlock_0_anchor.parentNode.insertBefore(eachBlock_0_fragment, eachBlock_0_anchor);
+			eachBlock_0_iterations.length = eachBlock_0_value.length;
 		},
 
 		teardown: function teardown(detach) {
-			if (detach) h1.parentNode.removeChild(h1);
+			if (detach) p.parentNode.removeChild(p);
 
 			if (detach) text.parentNode.removeChild(text);
 
 			if (detach) text2.parentNode.removeChild(text2);
 
-			if (detach) p.parentNode.removeChild(p);
+			button.removeEventListener('click', clickHandler, false);
+			if (detach) button.parentNode.removeChild(button);
+
+			if (detach) text3.parentNode.removeChild(text3);
 
 			if (detach) text4.parentNode.removeChild(text4);
 
+			if (detach) p1.parentNode.removeChild(p1);
+
+			if (detach) text5.parentNode.removeChild(text5);
+
 			if (detach) text6.parentNode.removeChild(text6);
+
+			for (var i = 0; i < eachBlock_0_iterations.length; i += 1) {
+				eachBlock_0_iterations[i].teardown(detach);
+			}
+
+			if (detach) eachBlock_0_anchor.parentNode.removeChild(eachBlock_0_anchor);
+		}
+	};
+}
+
+function renderEachBlock_0(root, eachBlock_0_value, category, category__index, component, target) {
+	var button = document.createElement('button');
+	function clickHandler(event) {
+		var eachBlock_0_value = this.__svelte.eachBlock_0_value,
+		    category__index = this.__svelte.category__index,
+		    category = eachBlock_0_value[category__index];
+
+		component.select(category);
+	}
+
+	button.addEventListener('click', clickHandler, false);
+	button.__svelte = {
+		eachBlock_0_value: eachBlock_0_value,
+		category__index: category__index
+	};
+
+	var text = document.createTextNode("Select ");
+	button.appendChild(text);
+
+	var text1 = document.createTextNode(category);
+	button.appendChild(text1);
+
+	target.appendChild(button);
+
+	return {
+		update: function update(changed, root, eachBlock_0_value, category, category__index) {
+			var category = eachBlock_0_value[category__index];
+
+			button.__svelte.eachBlock_0_value = eachBlock_0_value;
+			button.__svelte.category__index = category__index;
+
+			text1.data = category;
+		},
+
+		teardown: function teardown(detach) {
+			button.removeEventListener('click', clickHandler, false);
+			if (detach) button.parentNode.removeChild(button);
+
+			if (detach) text.parentNode.removeChild(text);
 		}
 	};
 }
 
 function HelloWorld(options) {
 	var component = this;
-	var state = options.data || {};
+	var state = Object.assign(template.data(), options.data);
 
 	var observers = {
 		immediate: Object.create(null),
@@ -168,7 +278,7 @@ function HelloWorld(options) {
 			var newValue = newState[key];
 			var oldValue = oldState[key];
 
-			if (newValue === oldValue && (typeof newValue === "undefined" ? "undefined" : _typeof(newValue)) !== 'object') continue;
+			if (newValue === oldValue && (typeof newValue === 'undefined' ? 'undefined' : _typeof(newValue)) !== 'object') continue;
 
 			var callbacks = group[key];
 			if (!callbacks) continue;
@@ -249,6 +359,8 @@ function HelloWorld(options) {
 	var mainFragment = renderMainFragment(state, this, options.target);
 }
 
+HelloWorld.prototype = template.methods;
+
 var app = new HelloWorld({
   target: document.querySelector('main'),
   data: {
@@ -259,4 +371,4 @@ var app = new HelloWorld({
 });
 
 }());
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjpudWxsLCJzb3VyY2VzIjpbInNyYy9tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBIZWxsb1dvcmxkIGZyb20gJy4vY29tcG9uZW50cy9IZWxsb1dvcmxkLmh0bWwnXG5cbnZhciBhcHAgPSBuZXcgSGVsbG9Xb3JsZCh7XG4gIHRhcmdldDogZG9jdW1lbnQucXVlcnlTZWxlY3RvcignbWFpbicpLFxuICBkYXRhOiB7XG4gICAgbmFtZTogJ0NvcmF6b24nLFxuICAgIGE6IDEsXG4gICAgYjogNlxuICB9XG59KVxuIl0sIm5hbWVzIjpbImFwcCIsIkhlbGxvV29ybGQiLCJkb2N1bWVudCIsInF1ZXJ5U2VsZWN0b3IiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRUEsSUFBSUEsTUFBTSxJQUFJQyxVQUFKLENBQWU7VUFDZkMsU0FBU0MsYUFBVCxDQUF1QixNQUF2QixDQURlO1FBRWpCO1VBQ0UsU0FERjtPQUVELENBRkM7T0FHRDs7Q0FMRyxDQUFWOzsifQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjpudWxsLCJzb3VyY2VzIjpbInNyYy9tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBIZWxsb1dvcmxkIGZyb20gJy4vY29tcG9uZW50cy9IZWxsb1dvcmxkLmh0bWwnXG5cbnZhciBhcHAgPSBuZXcgSGVsbG9Xb3JsZCh7XG4gIHRhcmdldDogZG9jdW1lbnQucXVlcnlTZWxlY3RvcignbWFpbicpLFxuICBkYXRhOiB7XG4gICAgbmFtZTogJ0NvcmF6b24nLFxuICAgIGE6IDEsXG4gICAgYjogNlxuICB9XG59KVxuIl0sIm5hbWVzIjpbImFwcCIsIkhlbGxvV29ybGQiLCJkb2N1bWVudCIsInF1ZXJ5U2VsZWN0b3IiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVBLElBQUlBLE1BQU0sSUFBSUMsVUFBSixDQUFlO1VBQ2ZDLFNBQVNDLGFBQVQsQ0FBdUIsTUFBdkIsQ0FEZTtRQUVqQjtVQUNFLFNBREY7T0FFRCxDQUZDO09BR0Q7O0NBTEcsQ0FBVjs7In0=

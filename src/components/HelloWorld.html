@@ -1,2 +1,27 @@
-<h1>Hola mi {{name}}</h1>
-<p>{{a}} + {{b}} = {{a + b}}</p>
+<p>Count: {{count}}</p>
+<button on:click='set({ count: count + 1})'>+1</button>
+
+<p>Select Category:</p>
+
+{{#each categories as category}}
+<button on:click='select( category )'> Select {{category}}</button> {{/each}}
+
+<script>
+  export default {
+    data () {
+      return {
+        categories: [
+          'animal',
+          'vegetal',
+          'mineral'
+        ],
+        count: 0
+      }
+    },
+    methods: {
+      select ( name ) {
+        console.log (name)
+      } 
+    }
+  }
+</script>
